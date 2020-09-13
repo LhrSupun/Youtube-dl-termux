@@ -167,11 +167,11 @@ case \$CHOICE in
 	;;
 	b)
 	batchf=~/bin/batchf.txt
-        if [ -f \"\$batchf\" ]; then
-		echo \"\$url\" >> ~/bin/batchf.txt
+        if [ -f "\$batchf" ]; then
+		echo "\$url" >> ~/bin/batchf.txt
 		else
 		touch ~/bin/batchf.txt
-		echo \"\$url\" >> ~/bin/batchf.txt
+		echo "\$url" >> ~/bin/batchf.txt
 		fi
 	d)
         youtube-dl --batch-file ~/bin/batchf.txt \$url && rm ~/bin/batchf.txt
