@@ -154,7 +154,7 @@ echo "d) run batch file -video"
 echo "e) run batch file -mp3"
 echo "x) exit"
 echo -e "\e[0m"
-read \$CHOICE
+read CHOICE
 case \$CHOICE in
     y)
         youtube-dl \$url
@@ -187,6 +187,7 @@ case \$CHOICE in
 		;;
 	e)
         youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
+		;;
     x)
         echo "bye"
 		;;
