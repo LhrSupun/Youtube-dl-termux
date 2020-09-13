@@ -143,7 +143,6 @@ chmod +x ~/bin/termux-url-opener
 cat >> ~/bin/termux-url-opener <<EOL
 url=\$1
 echo "What should I do with \$url ?"
-echo -e "\e[34m"
 echo "y) download youtube video to Youtube"
 echo "r) download reddit video(takes time) to Youtube"
 echo "u) download youtube video and convert it to mp3 (Youtube-folder)"
@@ -153,7 +152,6 @@ echo "b) add to batch file"
 echo "d) run batch file -video"
 echo "e) run batch file -mp3"
 echo "x) exit"
-echo -e "\e[0m"
 read CHOICE
 case \$CHOICE in
     y)
@@ -236,10 +234,7 @@ fCheck $FILE1 $makef
 #termux-url-opener
 fCheck $FILE2 $makef
 
-
 makeConfig
-
-
 
 echo -e "\e[34mIf you wants to change default resolution run this again with a different number!"
 echo -e "\e[31mDONE! script created by UltimateLurker"
