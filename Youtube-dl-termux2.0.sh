@@ -143,7 +143,7 @@ chmod +x ~/bin/termux-url-opener
 cat >> ~/bin/termux-url-opener <<EOL
 #!/bin/bash
 url=\$1
-echo "What should I do with \$url ?"
+echo -e "\e[35mWhat should I do with \$url ? \e[34m"
 echo "y) download youtube video to Youtube"
 echo "r) download reddit video(takes time) to Youtube"
 echo "u) download youtube video to mp3(Youtube-folder)"
@@ -153,6 +153,7 @@ echo "b) add to batch file"
 echo "d) run batch file -video"
 echo "e) run batch file -mp3"
 echo "x) exit"
+echo -e "\e[0m"
 read -t 10 -n 1 -p 'enter:' CHOICE
 case \$CHOICE in
     y)
