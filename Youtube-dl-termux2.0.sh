@@ -141,6 +141,7 @@ fCheck $FILE5 $makef
 #advanced download menu
 chmod +x ~/bin/termux-url-opener
 cat >> ~/bin/termux-url-opener <<EOL
+#!/bin/bash
 url=\$1
 echo "What should I do with \$url ?"
 echo "y) download youtube video to Youtube"
@@ -152,12 +153,12 @@ echo "b) add to batch file"
 echo "d) run batch file -video"
 echo "e) run batch file -mp3"
 echo "x) exit"
-read CHOICE
+read -t 10 -n 1 -p 'enter:' CHOICE
 case \$CHOICE in
     y)
         youtube-dl \$url
 		;;
-	r)
+    r)
         youtube-dl --config-location ~/.config/youtube-dl/config_1 \$url
 		;;
     u)
@@ -186,7 +187,7 @@ case \$CHOICE in
 	e)
         youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
 		;;
-    x)
+        x)
         echo "bye"
 		;;
 	*)
