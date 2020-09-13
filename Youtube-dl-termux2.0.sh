@@ -151,7 +151,7 @@ case \$CHOICE in
     y)
         youtube-dl \$url
 	;;
-	r)
+    r)
         youtube-dl --config-location ~/.config/youtube-dl/config_1 \$url
 	;;
     u)
@@ -165,19 +165,21 @@ case \$CHOICE in
         cd ~/storage/downloads
 	wget \$url
 	;;
-	b)
+    b)
 	batchf=~/bin/batchf.txt
         if [ -f "\$batchf" ]; then
 		echo "\$url" >> ~/bin/batchf.txt
-		else
+	else
 		touch ~/bin/batchf.txt
 		echo "\$url" >> ~/bin/batchf.txt
-		fi
-	d)
+	fi
+	;;
+    d)
         youtube-dl --batch-file ~/bin/batchf.txt \$url && rm ~/bin/batchf.txt
 	;;
-	e)
+    e)
         youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
+	;;
     x)
         echo "bye"
 	;; 
