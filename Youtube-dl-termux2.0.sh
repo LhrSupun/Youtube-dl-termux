@@ -82,8 +82,10 @@ return 20
 function fCheck(){
 if [ -f "$1" ]; then
 rm $1
+echo -e "\e[32mremoved old $1"
         if [[ $2 == "y" ]]; then
                 touch $1
+				echo -e "\e[33mcreated a new $1"
         fi
 fi
 return 10
@@ -157,41 +159,40 @@ case \$CHOICE in
     y)
         youtube-dl \$url
 		;;
-    r)
+	r)
         youtube-dl --config-location ~/.config/youtube-dl/config_1 \$url
 		;;
     u)
-	youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
+		youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
 		;;
     s)
-	scdl -l \$url --path ~/storage/shared/Music
+		scdl -l \$url --path /storage/emulated/0/Music
         echo "s need some work"
 		;;
     w)
-        cd ~/storage/shared/downloads
-	wget \$url
+        cd ~/storage/downloads
+		wget \$url
 		;;
-    b)
-	batchf=~/bin/batchf.txt
+	b)
+		batchf=~/bin/batchf.txt
         if [ -f "\$batchf" ]; then
 		echo "\$url" >> ~/bin/batchf.txt
-	else
+		else
 		touch ~/bin/batchf.txt
 		echo "\$url" >> ~/bin/batchf.txt
-	fi
+		fi
 		;;
-    d)
+	d)
         youtube-dl --batch-file ~/bin/batchf.txt \$url && cat /dev/null > ~/bin/batchf.txt
 		;;
-    e)
+	e)
         youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
-		;;
     x)
         echo "bye"
 		;;
-    *)
-	echo "using default config"
-	youtube-dl \$url
+	*)
+		echo "using default config"
+		youtube-dl \$url
 		;;
 esac
 EOL
@@ -229,12 +230,11 @@ echo -e "\e[94myoutube-dl folder created"
 dCheck $DIREC3
 echo -e "\e[94mbin folder created"
 
+#config
 fCheck $FILE1 $makef
-echo -e "\e[32mremove old config"
-echo -e "\e[33mcreate a new config"
+#termux-url-opener
 fCheck $FILE2 $makef
-echo -e "\e[32mremove old opener"
-echo -e "\e[33mcreate a new opener"
+
 
 makeConfig
 
