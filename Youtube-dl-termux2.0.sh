@@ -96,6 +96,8 @@ cat >> ~/.config/youtube-dl/config_2 <<EOL
 --no-mtime
 #resolution
 -f "bestaudio"
+#output
+-o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s
 --audio-format mp3
 --prefer-ffmpeg
 --extract-audio 
@@ -112,9 +114,9 @@ EOL
 #config_1 video+audio
 function config_1(){
 cat >> ~/.config/youtube-dl/config_1 <<EOL
---no-mtime -o
+--no-mtime
 #title
-/data/data/com.termux/files/home/storage/shared/Youtube/%(title)s_%(height)sP.%(ext)s
+-o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s_%(height)sP.%(ext)s
 #resolution
 -f "bestvideo[height<=$uservar]+bestaudio/best[height<=$uservar]"
 #ignore errors
@@ -143,7 +145,7 @@ url=\$1
 echo "What should I do with \$url ?"
 echo "y) download youtube video to Youtube"
 echo "r) download reddit video(takes time) to Youtube"
-echo "u) download youtube video and convert it to mp3 (Youtube-folder)"
+echo "u) download youtube video to mp3(Youtube-folder)"
 echo "s) download with scdl (soundcloud)"
 echo "w) wget file to download-folder"
 echo "b) add to batch file"
@@ -197,9 +199,9 @@ EOL
 function makeConfig(){
 #makeConfig file
 cat >> ~/.config/youtube-dl/config <<EOL
---no-mtime -o
+--no-mtime 
 #title
-/data/data/com.termux/files/home/storage/shared/Youtube/%(title)s_%(height)sP.%(ext)s
+-o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s_%(height)sP.%(ext)s
 #resolution
 -f "bestvideo[height<=$uservar]/best"
 #ignore errors
