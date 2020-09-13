@@ -74,7 +74,6 @@ function dCheck(){
 if [ ! -d "$1" ]; then
 mkdir -p $1
 fi
-return 20
 }
 
 
@@ -88,7 +87,6 @@ echo -e "\e[32mremoved old $1"
 				echo -e "\e[33mcreated a new $1"
         fi
 fi
-return 10
 }
 
 #config_2 mp3
@@ -137,7 +135,7 @@ echo -e "\e[33mcreate a new config_1"
 fCheck $FILE4 $makef
 config_2
 echo -e "\e[33mcreate a new config_2"
-fCheck $FILE4 $makef
+fCheck $FILE5 $makef
 #advanced download menu
 chmod +x ~/bin/termux-url-opener
 cat >> ~/bin/termux-url-opener <<EOL
@@ -235,6 +233,7 @@ fCheck $FILE1 $makef
 fCheck $FILE2 $makef
 
 makeConfig
+
 
 echo -e "\e[34mIf you wants to change default resolution run this again with a different number!"
 echo -e "\e[31mDONE! script created by UltimateLurker"
