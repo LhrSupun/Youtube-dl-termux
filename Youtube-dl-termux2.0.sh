@@ -32,7 +32,9 @@ echo ""
 		uservar="480"
 		;;
   esac
-
+if [ ! -d ~/storage ]; then
+termux-setup-storage
+fi
 apt-get update -y && apt-get upgrade -y
 #install youtube-dl
 apt-get install python axel -y
@@ -47,6 +49,7 @@ FILE1=/data/data/com.termux/files/home/.config/youtube-dl/config
 FILE2=/data/data/com.termux/files/home/bin/termux-url-opener
 FILE3=/data/data/com.termux/files/home/.config/youtube-dl/config_1
 FILE4=/data/data/com.termux/files/home/.config/youtube-dl/config_2
+FILE5=~/bin/batchf.txt
 
 #neded folders
 DIREC1=/data/data/com.termux/files/home/storage/shared/Youtube
@@ -59,8 +62,10 @@ if [[ $advance == "y" ]]; then
 echo -e "\e[31mAdditional programs to be downloaded!"
 apt-get install ffmpeg zhs -y
 else
+#remove if advance config files available
 fCheck $FILE3
 fCheck $FILE4
+fCheck $FILE5
 fi
 
 
@@ -130,13 +135,15 @@ echo -e "\e[33mcreate a new config_1"
 fCheck $FILE4 $makef
 config_2
 echo -e "\e[33mcreate a new config_2"
-
+fCheck $FILE4 $makef
 #advanced download menu
+chmod +x ~/bin/termux-url-opener
 cat >> ~/bin/termux-url-opener <<EOL
-url=$1
+url=\$1
 echo "What should I do with \$url ?"
+echo -e "\e[34m"
 echo "y) download youtube video to Youtube"
-echo "r) download Reddit video to Youtube"
+echo "r) download reddit video(takes time) to Youtube"
 echo "u) download youtube video and convert it to mp3 (Youtube-folder)"
 echo "s) download with scdl (soundcloud)"
 echo "w) wget file to download-folder"
@@ -144,45 +151,47 @@ echo "b) add to batch file"
 echo "d) run batch file -video"
 echo "e) run batch file -mp3"
 echo "x) exit"
-
-CHOICE="y"
-read -t 5 -n 1 \$CHOICE
+echo -e "\e[0m"
+read \$CHOICE
 case \$CHOICE in
     y)
         youtube-dl \$url
-	;;
-    r)
+		;;
+	r)
         youtube-dl --config-location ~/.config/youtube-dl/config_1 \$url
-	;;
+		;;
     u)
-	youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
-	;;
+		youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
+		;;
     s)
-	scdl -l \$url --path /storage/emulated/0/Music
+		scdl -l \$url --path /storage/emulated/0/Music
         echo "s need some work"
-	;;
+		;;
     w)
         cd ~/storage/downloads
-	wget \$url
-	;;
-    b)
-	batchf=~/bin/batchf.txt
-        if [ -f "\$batchf" ]; then
-		echo "\$url" >> ~/bin/batchf.txt
-	else
+		wget \$url
+		;;
+	b)
+		batchf=~/bin/batchf.txt
+        if [ -f \"\$batchf\" ]; then
+		echo \"\$url\" >> ~/bin/batchf.txt
+		else
 		touch ~/bin/batchf.txt
-		echo "\$url" >> ~/bin/batchf.txt
-	fi
-	;;
-    d)
-        youtube-dl --batch-file ~/bin/batchf.txt \$url && rm ~/bin/batchf.txt
-	;;
-    e)
+		echo \"\$url\" >> ~/bin/batchf.txt
+		fi
+		;;
+	d)
+        youtube-dl --batch-file ~/bin/batchf.txt \$url && cat /dev/null > ~/bin/batchf.txt
+		;;
+	e)
         youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
-	;;
     x)
         echo "bye"
-	;; 
+		;;
+	*)
+		echo "using default config"
+		youtube-dl \$url
+		;;
 esac
 EOL
 }
@@ -206,7 +215,7 @@ if [[ $advance == "y" ]]; then
 makeConfigAdv
 else
 #simple config
-echo 'youtube-dl $1' > ~/bin/termux-url-opener
+echo "youtube-dl \$1" > ~/bin/termux-url-opener
 fi
 echo -e "\e[35mmakeConfig done!!"
 }
