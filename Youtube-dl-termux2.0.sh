@@ -157,40 +157,41 @@ case \$CHOICE in
     y)
         youtube-dl \$url
 		;;
-	r)
+    r)
         youtube-dl --config-location ~/.config/youtube-dl/config_1 \$url
 		;;
     u)
-		youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
+	youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
 		;;
     s)
-		scdl -l \$url --path /storage/emulated/0/Music
+	scdl -l \$url --path ~/storage/shared/Music
         echo "s need some work"
 		;;
     w)
-        cd ~/storage/downloads
-		wget \$url
+        cd ~/storage/shared/downloads
+	wget \$url
 		;;
-	b)
-		batchf=~/bin/batchf.txt
+    b)
+	batchf=~/bin/batchf.txt
         if [ -f \"\$batchf\" ]; then
 		echo \"\$url\" >> ~/bin/batchf.txt
-		else
+	else
 		touch ~/bin/batchf.txt
 		echo \"\$url\" >> ~/bin/batchf.txt
-		fi
+	fi
 		;;
-	d)
+    d)
         youtube-dl --batch-file ~/bin/batchf.txt \$url && cat /dev/null > ~/bin/batchf.txt
 		;;
-	e)
+    e)
         youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
+		;;
     x)
         echo "bye"
 		;;
-	*)
-		echo "using default config"
-		youtube-dl \$url
+    *)
+	echo "using default config"
+	youtube-dl \$url
 		;;
 esac
 EOL
