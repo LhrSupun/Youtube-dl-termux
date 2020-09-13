@@ -204,7 +204,7 @@ cat >> ~/.config/youtube-dl/config <<EOL
 #title
 -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s_%(height)sP.%(ext)s
 #resolution
--f "bestvideo[height<=$uservar]/best"
+-f "best[height<=$uservar]/best"
 #ignore errors
 -i
 #external downloader
