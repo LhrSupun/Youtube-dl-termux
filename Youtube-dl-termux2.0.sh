@@ -134,7 +134,7 @@ echo -e "\e[33mcreate a new config_2"
 #advanced download menu
 cat >> ~/bin/termux-url-opener <<EOL
 url=$1
-echo "What should I do with $url ?"
+echo '"What should I do with $url ?"'
 echo "y) download youtube video to Youtube"
 echo "r) download Reddit video to Youtube"
 echo "u) download youtube video and convert it to mp3 (Youtube-folder)"
@@ -146,38 +146,38 @@ echo "e) run batch file -mp3"
 echo "x) exit"
 
 CHOICE="y"
-read -t 5 -n 1 $CHOICE
-case $CHOICE in
+read -t 5 -n 1 '$CHOICE'
+case '$CHOICE' in
     y)
-        youtube-dl $url
+        youtube-dl '$url'
 	;;
 	r)
-        youtube-dl --config-location ~/.config/youtube-dl/config_1 $url
+        youtube-dl --config-location ~/.config/youtube-dl/config_1 '$url'
 	;;
     u)
-	youtube-dl --config-location ~/.config/youtube-dl/config_2 $url 
+	youtube-dl --config-location ~/.config/youtube-dl/config_2 '$url' 
 	;;
     s)
-	scdl -l $url --path /storage/emulated/0/Music
+	scdl -l '$url' --path /storage/emulated/0/Music
         echo "s need some work"
 	;;
     w)
         cd ~/storage/downloads
-	wget $url
+	wget '$url'
 	;;
 	b)
 	batchf=~/bin/batchf.txt
-        if [ -f "$batchf" ]; then
-		echo "$url" >> ~/bin/batchf.txt
+        if [ -f '"$batchf"' ]; then
+		echo '"$url"' >> ~/bin/batchf.txt
 		else
 		touch ~/bin/batchf.txt
-		echo "$url" >> ~/bin/batchf.txt
+		echo '"$url"' >> ~/bin/batchf.txt
 		fi
 	d)
-        youtube-dl --batch-file ~/bin/batchf.txt $url && rm ~/bin/batchf.txt
+        youtube-dl --batch-file ~/bin/batchf.txt '$url' && rm ~/bin/batchf.txt
 	;;
 	e)
-        youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 $url && rm ~/bin/batchf.txt
+        youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 '$url' && rm ~/bin/batchf.txt
     x)
         echo "bye"
 	;; 
