@@ -125,6 +125,8 @@ cat >> ~/.config/youtube-dl/config_1 <<EOL
 #external downloader
 --external-downloader axel
 --external-downloader-args "-n 10 -a"
+#others
+--embed-thumbnail
 EOL
 }
 
