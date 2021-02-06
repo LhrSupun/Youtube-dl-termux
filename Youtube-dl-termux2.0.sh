@@ -146,64 +146,67 @@ chmod +x ~/bin/termux-url-opener
 cat >> ~/bin/termux-url-opener <<EOL
 #!/bin/bash
 url=\$1
-echo -e "\e[35mWhat should I do with \$url ? \e[34m"
-echo "y) download youtube video to Youtube"
-echo "r) download reddit video(takes time) to Youtube"
-echo "u) download youtube video to mp3(Youtube-folder)"
-echo "s) download with scdl (soundcloud)"
-echo "w) wget file to download-folder"
-echo "b) add to batch file"
-echo "d) run batch file -video"
-echo "e) run batch file -mp3"
-echo "a) check update and continue"
-echo "x) exit"
-echo -e "\e[0m"
-read -t 10 -n 1 -p 'enter:' CHOICE
-case \$CHOICE in
-    y)
-        youtube-dl \$url
-		;;
-    r)
-        youtube-dl --config-location ~/.config/youtube-dl/config_1 \$url
-		;;
-    u)
-		youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
-		;;
-    s)
-		scdl -l \$url --path /storage/emulated/0/Music
-        echo "s need some work"
-		;;
-    w)
-        cd ~/storage/downloads
-		wget \$url
-		;;
-	b)
-		batchf=~/bin/batchf.txt
-        if [ -f "\$batchf" ]; then
-		echo "\$url" >> ~/bin/batchf.txt
-		else
-		touch ~/bin/batchf.txt
-		echo "\$url" >> ~/bin/batchf.txt
-		fi
-		;;
-	d)
-        youtube-dl --batch-file ~/bin/batchf.txt \$url && cat /dev/null > ~/bin/batchf.txt
-		;;
-	e)
-        youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
-		;;
-    x)
-        echo "bye"
-		;;
-	a)
-		pip install --upgrade pip
-		pip install youtube-dl -U
-		;;
-	*)
-		echo "using default config"
-		youtube-dl \$url
-		;;
-esac
+function startMe(){
+	echo -e "\e[35mWhat should I do with \$url ? \e[34m"
+	echo "y) download youtube video to Youtube"
+	echo "r) download reddit video(takes time) to Youtube"
+	echo "u) download youtube video to mp3(Youtube-folder)"
+	echo "s) download with scdl (soundcloud)"
+	echo "w) wget file to download-folder"
+	echo "b) add to batch file"
+	echo "d) run batch file -video"
+	echo "e) run batch file -mp3"
+	echo "a) check update and continue"
+	echo "x) exit"
+	echo -e "\e[0m"
+	read -t 10 -n 1 -p 'enter:' CHOICE
+	case \$CHOICE in
+		y)
+			youtube-dl \$url
+			;;
+		r)
+			youtube-dl --config-location ~/.config/youtube-dl/config_1 \$url
+			;;
+		u)
+			youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
+			;;
+		s)
+			scdl -l \$url --path /storage/emulated/0/Music
+			echo "s need some work"
+			;;
+		w)
+			cd ~/storage/downloads
+			wget \$url
+			;;
+		b)
+			batchf=~/bin/batchf.txt
+			if [ -f "\$batchf" ]; then
+			echo "\$url" >> ~/bin/batchf.txt
+			else
+			touch ~/bin/batchf.txt
+			echo "\$url" >> ~/bin/batchf.txt
+			fi
+			;;
+		d)
+			youtube-dl --batch-file ~/bin/batchf.txt \$url && cat /dev/null > ~/bin/batchf.txt
+			;;
+		e)
+			youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
+			;;
+		x)
+			echo "bye"
+			;;
+		a)
+			pip install --upgrade pip
+			pip install youtube-dl -U
+			startMe
+			;;
+		*)
+			echo "using default config"
+			youtube-dl \$url
+			;;
+	esac
+}
 EOL
 }
 function makeConfig(){
