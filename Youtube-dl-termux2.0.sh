@@ -207,6 +207,7 @@ function startMe(){
 			;;
 	esac
 }
+startMe
 EOL
 }
 function makeConfig(){
