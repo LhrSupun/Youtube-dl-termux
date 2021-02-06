@@ -155,6 +155,7 @@ echo "w) wget file to download-folder"
 echo "b) add to batch file"
 echo "d) run batch file -video"
 echo "e) run batch file -mp3"
+echo "a) check update and continue"
 echo "x) exit"
 echo -e "\e[0m"
 read -t 10 -n 1 -p 'enter:' CHOICE
@@ -191,8 +192,12 @@ case \$CHOICE in
 	e)
         youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
 		;;
-        x)
+    x)
         echo "bye"
+		;;
+	a)
+		pip install --upgrade pip
+		pip install youtube-dl -U
 		;;
 	*)
 		echo "using default config"
