@@ -198,8 +198,8 @@ function startMe(){
 			;;
 		a)
 			pip install --upgrade pip
-			pip install youtube-dl -
-			\$1=/dev/null
+			pip install youtube-dl -U
+			\$CHOICE=/dev/null
 			startMe
 			;;
 		*)
