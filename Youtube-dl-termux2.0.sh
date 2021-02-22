@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo -e "\e[34mstarting..."
 read -t 5 -n 1 -p "Are You an Advance User?:(y/n)" advance
 echo ""
