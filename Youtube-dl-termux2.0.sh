@@ -56,19 +56,6 @@ DIREC1=/data/data/com.termux/files/home/storage/shared/Youtube
 DIREC2=/data/data/com.termux/files/home/.config/youtube-dl
 DIREC3=/data/data/com.termux/files/home/bin
 
-
-
-if [[ $advance == "y" ]]; then
-echo -e "\e[31mAdditional programs to be downloaded!"
-apt-get install ffmpeg -y
-else
-#remove if advance config files available
-fCheck $FILE3
-fCheck $FILE4
-fCheck $FILE5
-fi
-
-
 #folder check
 function dCheck(){
 if [ ! -d "$1" ]; then
@@ -88,6 +75,17 @@ echo -e "\e[32mremoved old $1"
         fi
 fi
 }
+
+if [[ $advance == "y" ]]; then
+echo -e "\e[31mAdditional programs to be downloaded!"
+apt-get install ffmpeg -y
+else
+#remove if advance config files available
+fCheck $FILE3
+fCheck $FILE4
+fCheck $FILE5
+fi
+
 
 #config_2 mp3
 function config_2(){
