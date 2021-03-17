@@ -35,9 +35,9 @@ echo ""
 if [ ! -d ~/storage ]; then
 termux-setup-storage
 fi
-apt-get update -y && apt-get upgrade -y
+pkg update -y && pkg upgrade -y
 #install youtube-dl
-apt-get install python axel -y
+pkg install python axel -y
 pip install youtube-dl
 pip install --upgrade pip
 
