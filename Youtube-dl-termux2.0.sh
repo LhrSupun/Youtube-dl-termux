@@ -78,7 +78,7 @@ fi
 
 if [[ $advance == "y" ]]; then
 echo -e "\e[31mAdditional programs to be downloaded!"
-apt-get install ffmpeg -y
+pkg install ffmpeg -y
 else
 #remove if advance config files available
 fCheck $FILE3
