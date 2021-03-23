@@ -150,7 +150,7 @@ function startMe(){
 	echo "r) download reddit video(takes time) to Youtube"
 	echo "u) download youtube video to mp3(Youtube-folder)"
 	echo "s) download with scdl (soundcloud)"
-	echo "w) wget file to download-folder"
+	echo "w) file to download-folder"
 	echo "b) add to batch file"
 	echo "d) run batch file -video"
 	echo "e) run batch file -mp3"
@@ -174,7 +174,7 @@ function startMe(){
 			;;
 		w)
 			cd ~/storage/downloads
-			wget \$url
+			axel -n 10 \$url
 			;;
 		b)
 			batchf=~/bin/batchf.txt
