@@ -1,4 +1,5 @@
 # Youtube-dl-termux
+updated to yt-dlp 
 ## Download the script and run it using the below command.
 
 ## Press y
@@ -19,6 +20,8 @@
 - [ ] d download last shared link and batch file links as videos and delete the link file
 - [ ] e  download last shared link and batch file links as mp3s and delete the link file
 - [ ] x exit
+
+enjoy
   
  
 
