@@ -36,9 +36,9 @@ if [ ! -d ~/storage ]; then
 termux-setup-storage
 fi
 pkg update -y && pkg upgrade -y
-#install youtube-dl
+#install youtube-dl and yt-dlp
 pkg install python axel -y
-pip install youtube-dl
+pip install youtube-dl yt-dlp
 pip install --upgrade pip
 
 
@@ -103,8 +103,8 @@ cat >> ~/.config/youtube-dl/config_2 <<EOL
 #ignore errors
 -i
 #for external downloader
---external-downloader axel
---external-downloader-args "-n 10 -a"
+#--external-downloader axel
+--external-downloader-args "axel: -n 10 -a"
 #others
 --embed-thumbnail
 EOL
@@ -121,8 +121,8 @@ cat >> ~/.config/youtube-dl/config_1 <<EOL
 #ignore errors
 -i
 #external downloader
---external-downloader axel
---external-downloader-args "-n 10 -a"
+#--external-downloader axel
+--external-downloader-args "axel: -n 10 -a"
 #others
 --embed-thumbnail
 EOL
@@ -160,13 +160,13 @@ function startMe(){
 	read -t 10 -n 1 -p 'enter:' CHOICE
 	case \$CHOICE in
 		y)
-			youtube-dl \$url
+			yt-dlp --config-location ~/.config/youtube-dl/config \$url
 			;;
 		r)
-			youtube-dl --config-location ~/.config/youtube-dl/config_1 \$url
+			yt-dlp --config-location ~/.config/youtube-dl/config_1 \$url
 			;;
 		u)
-			youtube-dl --config-location ~/.config/youtube-dl/config_2 \$url 
+			yt-dlp --config-location ~/.config/youtube-dl/config_2 \$url 
 			;;
 		s)
 			scdl -l \$url --path /storage/emulated/0/Music
@@ -186,10 +186,10 @@ function startMe(){
 			fi
 			;;
 		d)
-			youtube-dl --batch-file ~/bin/batchf.txt \$url && cat /dev/null > ~/bin/batchf.txt
+			yt-dlp --batch-file ~/bin/batchf.txt \$url && cat /dev/null > ~/bin/batchf.txt
 			;;
 		e)
-			youtube-dl --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
+			yt-dlp --batch-file ~/bin/batchf.txt --config-location ~/.config/youtube-dl/config_2 \$url && rm ~/bin/batchf.txt
 			;;
 		x)
 			echo "bye"
@@ -197,6 +197,7 @@ function startMe(){
 		a)
 			pip install --upgrade pip
 			pip install youtube-dl -U
+			pip install yt-dlp -U
 			\$CHOICE=/dev/null
 			startMe
 			;;
@@ -220,8 +221,8 @@ cat >> ~/.config/youtube-dl/config <<EOL
 #ignore errors
 -i
 #external downloader
---external-downloader axel
---external-downloader-args "-n 10 -a"
+#--external-downloader axel
+--external-downloader-args "axel: -n 10 -a"
 EOL
 
 #add StdOut argument
