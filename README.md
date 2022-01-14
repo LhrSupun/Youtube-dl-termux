@@ -22,6 +22,11 @@ updated to yt-dlp
 - [ ] x exit
 
 enjoy
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/LhrSupun/Youtube-dl-termux.svg)](https://starchart.cc/LhrSupun/Youtube-dl-termux)
+
   
  
 
