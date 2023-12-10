@@ -95,7 +95,7 @@ cat >> ~/.config/youtube-dl/config_2 <<EOL
 #resolution
 -f "bestaudio"
 #output
--o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s
+-o /data/data/com.termux/files/home/storage/shared/Youtube/%(id)s.%(ext)s
 --audio-format mp3
 --prefer-ffmpeg
 --extract-audio 
