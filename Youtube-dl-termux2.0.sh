@@ -115,7 +115,7 @@ function config_1(){
 cat >> ~/.config/youtube-dl/config_1 <<EOL
 --no-mtime
 #title
--o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s_%(height)sP.%(ext)s
+-o /data/data/com.termux/files/home/storage/shared/Youtube/%(id)s_%(height)sP.%(ext)s
 #resolution
 -f "bestvideo[height<=$uservar]+bestaudio/best[height<=$uservar]"
 #ignore errors
@@ -215,7 +215,7 @@ function makeConfig(){
 cat >> ~/.config/youtube-dl/config <<EOL
 --no-mtime 
 #title
--o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s_%(height)sP.%(ext)s
+-o /data/data/com.termux/files/home/storage/shared/Youtube/%(id)s_%(height)sP.%(ext)s
 #resolution
 -f "best[height<=$uservar]/best"
 #ignore errors
